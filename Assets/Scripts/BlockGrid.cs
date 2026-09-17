@@ -45,8 +45,8 @@ public class BlockGrid : MonoBehaviour
         //Vector2 startPos = transform.position;
         int randomX = UnityEngine.Random.Range(2,width-2);
         int randomY = UnityEngine.Random.Range(0,height-1);
-        Vector2 startPos = new Vector2(.5f + transform.position.x + randomX*BlockSystem.CellSize,.5f+transform.position.y+randomY*BlockSystem.CellSize);
-        Debug.Log(startPos);
+        Vector3 startPos = new Vector3(.5f + transform.position.x + randomX*BlockSystem.CellSize,.5f+transform.position.y+randomY*BlockSystem.CellSize);
+        //Debug.Log(startPos);
         List<Vector3> blockPositions = new List<Vector3>();
         blockPositions.Add(startPos);blockPositions.Add(new Vector2(startPos.x-1,startPos.y));blockPositions.Add(new Vector2(startPos.x+1,startPos.y));
 
@@ -54,6 +54,25 @@ public class BlockGrid : MonoBehaviour
         block.Setup(startPrefab,0);
         //List<Vector3> spawnBlockPositions=spawnBlocks.GetComponentsInChildren<GridShapeUnit>().ToList();
         //block.Setup(startPrefab,Quaternion.identity);
+        
+
+
+        //Set End
+        randomX = UnityEngine.Random.Range(0,width);
+        randomY = UnityEngine.Random.Range(0,height-1);
+        startPos = new Vector3(.5f + transform.position.x + randomX*BlockSystem.CellSize,.5f+transform.position.y+randomY*BlockSystem.CellSize);
+        foreach (Vector3 checkBlock in blockPositions)
+        {
+            if(checkBlock == startPos)
+            {
+                randomX = UnityEngine.Random.Range(0,width);
+                randomY = UnityEngine.Random.Range(0,height-1);
+                startPos = new Vector3(.5f + transform.position.x + randomX*BlockSystem.CellSize,.5f+transform.position.y+randomY*BlockSystem.CellSize);
+            }
+        }
+        blockPositions.Add(startPos);
+        block = Instantiate(blockPrefab,startPos,Quaternion.identity);
+        block.Setup(endPrefab,0);
         SetBuilding(block,blockPositions);
     }
 

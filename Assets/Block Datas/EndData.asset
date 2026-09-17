@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949b9827740c9744d8e3d39019ead214, type: 3}
-  m_Name: BlockData1
+  m_Name: EndData
   m_EditorClassIdentifier: Assembly-CSharp::BlockData
-  <Sprite>k__BackingField: {fileID: 2930102636665765576, guid: b0525385095f9d44a9b1fc1ffd9a4b93, type: 3}
+  <Sprite>k__BackingField: {fileID: 2930102636665765576, guid: 267878f767ac2ad4289fef39b9046762, type: 3}
