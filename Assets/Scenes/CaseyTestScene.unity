@@ -201,7 +201,7 @@ MonoBehaviour:
   width: 10
   height: 7
   startPrefab: {fileID: 11400000, guid: 886c66f3100f4db499f9436ff3aa6592, type: 2}
-  endPrefab: {fileID: 0}
+  endPrefab: {fileID: 11400000, guid: 8b63b26cc67135a49bcf25542717b5d9, type: 2}
   blockPrefab: {fileID: 6317382557731026216, guid: 0cfea77ee72c1c247a3aac0e0c36488e, type: 3}
 --- !u!4 &361012555
 Transform:
@@ -708,20 +708,20 @@ MonoBehaviour:
   statusText: {fileID: 594834775}
   timerText: {fileID: 591596658}
   statusTextTimer: 0
-  statusTextTimerMax: 0
+  statusTextTimerMax: 2
   gameTimer: 0
-  gameTimerMax: 0
+  gameTimerMax: 40
   blockSystem: {fileID: 238218543}
   blockGrid: {fileID: 361012554}
   buildingUI: {fileID: 1585209060}
-  playingUI: {fileID: 0}
+  playingUI: {fileID: 1400477883}
   redBlock: {fileID: 0}
   blueBlock: {fileID: 0}
   greenBlock: {fileID: 0}
   spawnOffset: 0.5
-  redPlayer: {fileID: 8638108938525206193, guid: 7d2003ac130087a40a5f102ea6fb8c05, type: 3}
-  greenPlayer: {fileID: 8638108938525206193, guid: 538f5d9968f08fc42adc2a729acab9bc, type: 3}
-  bluePlayer: {fileID: 8638108938525206193, guid: 6e3d2981a81398948b22601785b4213d, type: 3}
+  redPlayerPrefab: {fileID: 8638108938525206193, guid: 7d2003ac130087a40a5f102ea6fb8c05, type: 3}
+  greenPlayerPrefab: {fileID: 8638108938525206193, guid: 538f5d9968f08fc42adc2a729acab9bc, type: 3}
+  bluePlayerPrefab: {fileID: 8638108938525206193, guid: 6e3d2981a81398948b22601785b4213d, type: 3}
 --- !u!4 &800798563
 Transform:
   m_ObjectHideFlags: 0
