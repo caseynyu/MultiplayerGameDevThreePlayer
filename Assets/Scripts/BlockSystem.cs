@@ -73,7 +73,7 @@ public class BlockSystem : MonoBehaviour
     {
         Block block = Instantiate(blockPrefab,preview.transform.position,Quaternion.identity);
         block.Setup(preview.Data,preview.BlockSprite.Rotation);
-        Debug.Log(preview.transform.position);
+        //Debug.Log(preview.transform.position);
         grid.SetBuilding(block,blockPositions);
         Destroy(preview.gameObject);
         preview=null;
