@@ -21,6 +21,9 @@ namespace TarodevController
         private Vector2 _frameVelocity;
         private bool _cachedQueryStartInColliders;
 
+        public Gamepad currentGamepad;
+        public GameManager gameManager;
+
         #region Interface
 
         public Vector2 FrameInput => _frameInput.Move;
@@ -30,6 +33,8 @@ namespace TarodevController
         #endregion
 
         private float _time;
+
+        [SerializeField] private bool keyboardEnabled=false;
 
         private void Awake()
         {
@@ -52,7 +57,7 @@ namespace TarodevController
             bool jumpHeld = false;
 
             // Keyboard input
-            if (Keyboard.current != null)
+            if (Keyboard.current != null && keyboardEnabled==true)
             {
                 if (Keyboard.current.aKey.isPressed ||
                     Keyboard.current.leftArrowKey.isPressed)
@@ -88,17 +93,17 @@ namespace TarodevController
             }
 
             // Controller input
-            if (Gamepad.current != null)
+            if (currentGamepad != null)
             {
                 Vector2 gamepadMove =
-                    Gamepad.current.leftStick.ReadValue() +
-                    Gamepad.current.dpad.ReadValue();
+                    currentGamepad.leftStick.ReadValue() +
+                    currentGamepad.dpad.ReadValue();
 
                 if (gamepadMove.sqrMagnitude > moveInput.sqrMagnitude)
                     moveInput = Vector2.ClampMagnitude(gamepadMove, 1f);
 
-                jumpDown |= Gamepad.current.buttonSouth.wasPressedThisFrame;
-                jumpHeld |= Gamepad.current.buttonSouth.isPressed;
+                jumpDown |= currentGamepad.buttonSouth.wasPressedThisFrame;
+                jumpHeld |= currentGamepad.buttonSouth.isPressed;
             }
 
             _frameInput = new FrameInput
@@ -173,6 +178,19 @@ namespace TarodevController
             }
 
             Physics2D.queriesStartInColliders = _cachedQueryStartInColliders;
+        }
+
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Spike"))
+            {
+                //Debug.Log("Spike Entered");
+                gameManager.Death(gameObject);
+            }
+            if (collision.gameObject.CompareTag("Win"))
+            {
+                gameManager.PlayerWin(gameObject);
+            }
         }
 
         #endregion
