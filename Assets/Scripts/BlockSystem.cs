@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
-public class BuildingSystem : MonoBehaviour
+public class BlockSystem : MonoBehaviour
 {
     public const float CellSize = 1f;
     [SerializeField] private BlockData blockData1,blockData2,blockData3;
@@ -73,6 +73,7 @@ public class BuildingSystem : MonoBehaviour
     {
         Block block = Instantiate(blockPrefab,preview.transform.position,Quaternion.identity);
         block.Setup(preview.Data,preview.BlockSprite.Rotation);
+        Debug.Log(preview.transform.position);
         grid.SetBuilding(block,blockPositions);
         Destroy(preview.gameObject);
         preview=null;
