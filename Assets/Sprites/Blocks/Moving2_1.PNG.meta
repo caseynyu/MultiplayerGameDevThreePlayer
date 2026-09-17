@@ -1,0 +1,535 @@
+fileFormatVersion: 2
+guid: 0c7f73460958e284b9c4995960045c34
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -185119437154403832
+    second: Moving2_1_0
+  - first:
+      213: 364214696578413961
+    second: Moving2_1_1
+  - first:
+      213: -1701407634332706494
+    second: Moving2_1_2
+  - first:
+      213: 1528359257118146121
+    second: Moving2_1_3
+  - first:
+      213: -2182155949370863946
+    second: Moving2_1_4
+  - first:
+      213: 4724999907991143441
+    second: Moving2_1_5
+  - first:
+      213: 7553797122917847153
+    second: Moving2_1_6
+  - first:
+      213: -646402151180071501
+    second: Moving2_1_7
+  - first:
+      213: 1297898000031573627
+    second: Moving2_1_8
+  - first:
+      213: -2558430765557770240
+    second: Moving2_1_9
+  - first:
+      213: 2179108789311779819
+    second: Moving2_1_10
+  - first:
+      213: -7201873242168163360
+    second: Moving2_1_11
+  - first:
+      213: -3753276211681035385
+    second: Moving2_1_12
+  - first:
+      213: -7142525669196891131
+    second: Moving2_1_13
+  - first:
+      213: -8677786522412945464
+    second: Moving2_1_14
+  - first:
+      213: 2903003439333177191
+    second: Moving2_1_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Moving2_1_0
+      rect:
+        serializedVersion: 2
+        x: 1182
+        y: 1265
+        width: 57
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80a346b4ad25e6df0800000000000000
+      internalID: -185119437154403832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_1
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 1168
+        width: 59
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985788b3653fd0500800000000000000
+      internalID: 364214696578413961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_2
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 1081
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 249167165c26368e0800000000000000
+      internalID: -1701407634332706494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_3
+      rect:
+        serializedVersion: 2
+        x: 1174
+        y: 1005
+        width: 66
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94ef4b195a2d53510800000000000000
+      internalID: 1528359257118146121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_4
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 909
+        width: 58
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6be8e31c9bc67b1e0800000000000000
+      internalID: -2182155949370863946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_5
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 768
+        width: 61
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 114c097d162929140800000000000000
+      internalID: 4724999907991143441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_6
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 827
+        width: 67
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 170d2e8267a74d860800000000000000
+      internalID: 7553797122917847153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_7
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 713
+        width: 66
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bd0dd41ba48707f0800000000000000
+      internalID: -646402151180071501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_8
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 764
+        width: 61
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b76629eba5f030210800000000000000
+      internalID: 1297898000031573627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_9
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 703
+        width: 64
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0089f7c16c0ae7cd0800000000000000
+      internalID: -2558430765557770240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_10
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 598
+        width: 70
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be33cd106efbd3e10800000000000000
+      internalID: 2179108789311779819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_11
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 658
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e30d23817ecd0c90800000000000000
+      internalID: -7201873242168163360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_12
+      rect:
+        serializedVersion: 2
+        x: 1351
+        y: 636
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78bf3d2db2fa9ebc0800000000000000
+      internalID: -3753276211681035385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_13
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 545
+        width: 71
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50cf8602fb6a0ec90800000000000000
+      internalID: -7142525669196891131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_14
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 581
+        width: 65
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cf67ee722f429780800000000000000
+      internalID: -8677786522412945464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moving2_1_15
+      rect:
+        serializedVersion: 2
+        x: 1486
+        y: 520
+        width: 65
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 767f03f4f3a894820800000000000000
+      internalID: 2903003439333177191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Moving2_1_0: -185119437154403832
+      Moving2_1_1: 364214696578413961
+      Moving2_1_10: 2179108789311779819
+      Moving2_1_11: -7201873242168163360
+      Moving2_1_12: -3753276211681035385
+      Moving2_1_13: -7142525669196891131
+      Moving2_1_14: -8677786522412945464
+      Moving2_1_15: 2903003439333177191
+      Moving2_1_2: -1701407634332706494
+      Moving2_1_3: 1528359257118146121
+      Moving2_1_4: -2182155949370863946
+      Moving2_1_5: 4724999907991143441
+      Moving2_1_6: 7553797122917847153
+      Moving2_1_7: -646402151180071501
+      Moving2_1_8: 1297898000031573627
+      Moving2_1_9: -2558430765557770240
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

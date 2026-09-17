@@ -17063,7 +17063,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 0733fb976d3c76543a713a8e520f2b30, type: 3}
+  m_Sprite: {fileID: -2474250949257483082, guid: 2ad4b5fb01740194a844def0b7b8d4e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -17332,6 +17332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 05e6a06c5af93134ab98ff12e2c27265, type: 2}
+  gameManager: {fileID: 0}
+  keyboardEnabled: 0
 --- !u!50 &1832118837859065710
 Rigidbody2D:
   serializedVersion: 5
