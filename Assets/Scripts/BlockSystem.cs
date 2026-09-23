@@ -37,6 +37,17 @@ public class BlockSystem : MonoBehaviour
         }
     }
 
+    public void SwitchBlock(BlockData blockData)
+    {
+        if (preview != null)
+        {
+            Destroy(preview.gameObject);
+            preview=null;
+        }
+        preview = CreatePreview(blockData,MosuePositionToWorldPosition());
+        
+    }
+
     private Vector3 MosuePositionToWorldPosition()
     {
         Vector3 screenPos = Mouse.current.position.ReadValue();

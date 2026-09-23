@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlockGrid : MonoBehaviour
@@ -7,7 +10,7 @@ public class BlockGrid : MonoBehaviour
     [SerializeField] private int width;
     [SerializeField] private int height;
     private BlockGridCell[,]grid;
-    [SerializeField] BlockData startPrefab,endPrefab;
+    [SerializeField] BlockData startPrefab,redEndPrefab,blueEndPrefab,greenEndPrefab;
     [SerializeField] Block blockPrefab;
     private void Start()
 
@@ -42,9 +45,66 @@ public class BlockGrid : MonoBehaviour
                 grid[x,y] = new();
             }
         }
-        //Vector2 startPos = transform.position;
+
         int randomX = UnityEngine.Random.Range(2,width-2);
-        int randomY = UnityEngine.Random.Range(0,height-1);
+        Vector3 startPos = new Vector3(.5f + transform.position.x + randomX*BlockSystem.CellSize,.5f+transform.position.y);
+        List<Vector3> blockPositions = new List<Vector3>();
+        blockPositions.Add(startPos);blockPositions.Add(new Vector2(startPos.x-1,startPos.y));blockPositions.Add(new Vector2(startPos.x+1,startPos.y));
+        Block block = Instantiate(blockPrefab,startPos,Quaternion.identity);
+        block.Setup(startPrefab,0);
+        SetBuilding(block,blockPositions);
+        blockPositions.Clear();
+
+        //set ends
+
+        List<BlockData> endPrefabs = new List<BlockData>();
+        endPrefabs.Add(redEndPrefab);
+        endPrefabs.Add(blueEndPrefab);
+        endPrefabs.Add(greenEndPrefab);
+
+        randomX = UnityEngine.Random.Range(0,width);
+        int randomY = UnityEngine.Random.Range(4,9);
+        startPos = new Vector3(.5f+transform.position.x+randomX*BlockSystem.CellSize,.5f+transform.position.x+randomY*BlockSystem.CellSize);
+        blockPositions.Add(startPos);
+        int randomEndBlock = UnityEngine.Random.Range(0,endPrefabs.Count-1);
+        block = Instantiate(block,startPos,Quaternion.identity);
+        block.Setup(endPrefabs[randomEndBlock],0);
+        endPrefabs.RemoveAt(randomEndBlock);
+        SetBuilding(block,blockPositions);
+        blockPositions.Clear();
+
+        //set end 2
+
+        randomX = UnityEngine.Random.Range(0,width);
+        randomY = UnityEngine.Random.Range(10,15);
+        startPos = new Vector3(.5f+transform.position.x+randomX*BlockSystem.CellSize,.5f+transform.position.x+randomY*BlockSystem.CellSize);
+        blockPositions.Add(startPos);
+        randomEndBlock = UnityEngine.Random.Range(0,endPrefabs.Count-1);
+        block = Instantiate(block,startPos,Quaternion.identity);
+        block.Setup(endPrefabs[randomEndBlock],0);
+        endPrefabs.RemoveAt(randomEndBlock);
+        SetBuilding(block,blockPositions);
+        blockPositions.Clear();
+
+        //set end 3
+
+        randomX = UnityEngine.Random.Range(0,width);
+        randomY = UnityEngine.Random.Range(16,21);
+        startPos = new Vector3(.5f+transform.position.x+randomX*BlockSystem.CellSize,.5f+transform.position.x+randomY*BlockSystem.CellSize);
+        blockPositions.Add(startPos);
+        randomEndBlock = UnityEngine.Random.Range(0,endPrefabs.Count-1);
+        block = Instantiate(block,startPos,Quaternion.identity);
+        block.Setup(endPrefabs[randomEndBlock],0);
+        endPrefabs.RemoveAt(randomEndBlock);
+        SetBuilding(block,blockPositions);
+        blockPositions.Clear();
+
+        
+
+
+        /*//Vector2 startPos = transform.position;
+        int randomX = UnityEngine.Random.Range(2,width-2);
+        int randomY = UnityEngine.Random.Range(0,3);
         Vector3 startPos = new Vector3(.5f + transform.position.x + randomX*BlockSystem.CellSize,.5f+transform.position.y+randomY*BlockSystem.CellSize);
         //Debug.Log(startPos);
         List<Vector3> blockPositions = new List<Vector3>();
@@ -58,8 +118,16 @@ public class BlockGrid : MonoBehaviour
 
 
         //Set End
+
+        List<BlockData> endPrefabs = new List<BlockData>();
+        endPrefabs.Add(redEndPrefab);
+        endPrefabs.Add(blueEndPrefab);
+        endPrefabs.Add(greenEndPrefab);
+
         randomX = UnityEngine.Random.Range(0,width);
-        randomY = UnityEngine.Random.Range(0,height-1);
+        randomY = UnityEngine.Random.Range(4,12);
+
+
         startPos = new Vector3(.5f + transform.position.x + randomX*BlockSystem.CellSize,.5f+transform.position.y+randomY*BlockSystem.CellSize);
         foreach (Vector3 checkBlock in blockPositions)
         {
@@ -73,7 +141,52 @@ public class BlockGrid : MonoBehaviour
         blockPositions.Add(startPos);
         block = Instantiate(blockPrefab,startPos,Quaternion.identity);
         block.Setup(endPrefab,0);
+        SetBuilding(block,blockPositions);*/
+    }
+
+    /*private void SpawnBlock(float xRangeStart, float xRangeEnd, float yRangeStart, float yRangeEnd)
+    {
+        int randomX = UnityEngine.Random.Range(0,width);
+        int randomY = UnityEngine.Random.Range(4,12);
+        Vector3 startPos = new Vector3(.5f + transform.position.x + randomX*BlockSystem.CellSize,.5f+transform.position.y+randomY*BlockSystem.CellSize);
+        foreach (Vector3 checkBlock in blockPositions)
+        {
+            if(checkBlock == startPos)
+            {
+                x = UnityEngine.Random.Range(0,width);
+                y = UnityEngine.Random.Range(0,height-1);
+                startPos = new Vector3(.5f + transform.position.x + x*BlockSystem.CellSize,.5f+transform.position.y+y*BlockSystem.CellSize);
+            }
+        }
+        List<Vector3> blockPositions = new List<Vector3>();
+        blockPositions.Add(startPos);
+        block = Instantiate(blockPrefab,startPos,Quaternion.identity);
+        block.Setup(endPrefab,0);
         SetBuilding(block,blockPositions);
+    }*/
+    
+
+    private void CheckAlreadyPlaced(BlockData data,float rotation)
+    {
+        Block spawnedBlock = Instantiate(blockPrefab,transform.position,Quaternion.identity);
+        spawnedBlock.Setup(data,rotation);
+        List<Vector3> buildPositionsToCheck = spawnedBlock.GetComponentInChildren<BlockSprite>().GetAllBuildingPositions();
+        while (true)
+        {
+            float randomX = UnityEngine.Random.Range(0,width);
+            float randomY = UnityEngine.Random.Range(0,height-1);
+            Vector3 startPos = new Vector3(.5f + transform.position.x + randomX*BlockSystem.CellSize,.5f+transform.position.y+randomY*BlockSystem.CellSize);
+            //List<Vector3>() = data.Sprite.GetAllBuildingPositions()
+
+            foreach (Vector3 position in buildPositionsToCheck)
+            {
+                (int x,int y) = WorldToGridPosition(position);
+                if (x<0 || x>=width || y< 0 || y>=height) return;
+                if(!grid[x,y].isEmpty()) return;
+            }
+            break;
+        }
+        SetBuilding(spawnedBlock,buildPositionsToCheck);
     }
 
     public void SetBuilding(Block block, List<Vector3> allBuildingPositions)

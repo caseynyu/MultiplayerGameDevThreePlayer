@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public Transform redBlock,blueBlock,greenBlock;
     [SerializeField] private float spawnOffset=.5f;
     [SerializeField] private GameObject redPlayerPrefab,greenPlayerPrefab,bluePlayerPrefab;
+    [SerializeField] private GameObject redCursor,blueCursor,greenCursor;
     private Vector3 spawnPosRed,spawnPosBlue,spawnPosGreen;
 
     enum GameStates
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
         if (Gamepad.all.Count > 2)
         {
             playerRedGamepad = Gamepad.all[0];
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         buildingUI.SetActive(true);
         playingUI.SetActive(false);
         ResetLevel();
+        //redCursor.GetComponent<PlayerInput>().user.PerformPairingWithDevice(Gamepad.all[0]);
     }
 
     private void Update()
@@ -69,6 +70,11 @@ public class GameManager : MonoBehaviour
                 statusTextOn=false;
                 statusText.gameObject.SetActive(false);
             }
+        }
+
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            ResetLevel();
         }
     }
 
