@@ -3,6 +3,8 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using NUnit.Framework.Interfaces;
+using System.Drawing;
 
 public class CursorBehavior : MonoBehaviour
 {
@@ -22,14 +24,16 @@ public class CursorBehavior : MonoBehaviour
         transform.Translate(move * Time.deltaTime * moveSpeed);
         
         var pointer = new PointerEventData(EventSystem.current);
-        pointer.position=(GetComponent<RectTransform>().position);
+        pointer.position=(GetComponent<RectTransform>().anchoredPosition);
 
         List<RaycastResult> raycastResults = new List<RaycastResult>();
         graphicRaycaster.Raycast(pointer, raycastResults);
-        Debug.Log(transform.position);
+        //Debug.Log(raycastResults[0].);
         foreach (RaycastResult raycastResult in raycastResults)
         {
-            Debug.Log(raycastResult);
+            //Debug.Log(raycastResult);
+            IPointerClickHandler ipcHandler = raycastResult.gameObject.GetComponent<IPointerClickHandler>();
+            ipcHandler.OnPointerClick(pointer);
             var ui = raycastResult.gameObject.GetComponent<UIBehaviour>();
             if (ui)
             {
