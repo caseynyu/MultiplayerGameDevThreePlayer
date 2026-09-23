@@ -22,7 +22,8 @@ namespace TarodevController
         private bool _cachedQueryStartInColliders;
 
         public Gamepad currentGamepad;
-        public GameManager gameManager;
+        public GameManager gameManager; 
+            
 
         #region Interface
 
@@ -104,6 +105,7 @@ namespace TarodevController
 
                 jumpDown |= currentGamepad.buttonSouth.wasPressedThisFrame;
                 jumpHeld |= currentGamepad.buttonSouth.isPressed;
+                Debug.Log(jumpDown);
             }
 
             _frameInput = new FrameInput
@@ -148,6 +150,9 @@ namespace TarodevController
         
         private float _frameLeftGrounded = float.MinValue;
         private bool _grounded;
+        //check if you're on a wall and which way is away from that wall
+        private bool _onWall;
+        private int _wallDirection;
 
         private void CheckCollisions()
         {
@@ -156,7 +161,23 @@ namespace TarodevController
             // Ground and Ceiling
             bool groundHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, ~_stats.PlayerLayer);
             bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.PlayerLayer);
-
+            //wall
+            bool rightWallHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size,_col.direction, 0, Vector2.right, _stats.GrounderDistance, ~_stats.PlayerLayer);
+            bool leftWallHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size,_col.direction, 0, Vector2.left, _stats.GrounderDistance, ~_stats.PlayerLayer);
+            _onWall = !groundHit && (rightWallHit || leftWallHit);
+            
+            if (rightWallHit)
+            {
+                _wallDirection = 1;
+            }
+            else if (leftWallHit)
+            {
+                _wallDirection = -1;
+            }
+            else
+            {
+                _wallDirection = 0;
+            }
             // Hit a Ceiling
             if (ceilingHit) _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);
 

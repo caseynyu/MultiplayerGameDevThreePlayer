@@ -52,5 +52,9 @@ namespace TarodevController
 
         [Tooltip("The amount of time we buffer a jump. This allows jump input before actually hitting the ground")]
         public float JumpBuffer = .2f;
+        
+        [Header("WALL JUMP")]
+        public float WallSlideSpeed = 2f;
+        public Vector2 WallJumpPower = new Vector2(12f, 18f);
     }
 }
