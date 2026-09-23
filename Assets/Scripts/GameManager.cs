@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] float statusTextTimer,statusTextTimerMax, gameTimer,gameTimerMax;
     [SerializeField] BlockSystem blockSystem;
     [SerializeField] BlockGrid blockGrid;
-    private GameObject playerRed,playerBlue,playerGreen;
+    private GameObject playerRed, playerBlue, playerGreen;
+    [SerializeField] private GameObject playerTest;
     [SerializeField] GameObject buildingUI,playingUI;
     private Gamepad playerRedGamepad;
     private Gamepad playerBlueGamepad;
     private Gamepad playerGreenGamepad;
+    private Gamepad playerTestGamepad;
     public Transform redBlock,blueBlock,greenBlock;
     [SerializeField] private float spawnOffset=.5f;
     [SerializeField] private GameObject redPlayerPrefab,greenPlayerPrefab,bluePlayerPrefab;
@@ -30,7 +32,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+<<<<<<< Updated upstream
 
+=======
+        playerTestGamepad = Gamepad.all[0];
+        playerTest.GetComponent<PlayerController>().currentGamepad=playerTestGamepad;
+>>>>>>> Stashed changes
         if (Gamepad.all.Count > 2)
         {
             playerRedGamepad = Gamepad.all[0];

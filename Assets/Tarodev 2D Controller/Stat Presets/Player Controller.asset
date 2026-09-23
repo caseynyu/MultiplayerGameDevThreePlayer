@@ -24,7 +24,11 @@ MonoBehaviour:
   AirDeceleration: 30
   GroundingForce: -1.5
   GrounderDistance: 0.05
+<<<<<<< Updated upstream
   JumpPower: 18
+=======
+  JumpPower: 16
+>>>>>>> Stashed changes
   MaxFallSpeed: 20
   FallAcceleration: 55
   JumpEndEarlyGravityModifier: 3
