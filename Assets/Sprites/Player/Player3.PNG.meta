@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2ad4b5fb01740194a844def0b7b8d4e3
+guid: 00c5484ed73bbb24b9e0d92481026ded
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -132,12 +132,12 @@ TextureImporter:
       name: Player3_0
       rect:
         serializedVersion: 2
-        x: 347
-        y: 271
-        width: 1053
-        height: 1669
+        x: 383
+        y: 1227
+        width: 897
+        height: 712
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -154,12 +154,12 @@ TextureImporter:
       name: Player3_1
       rect:
         serializedVersion: 2
-        x: 523
+        x: 522
         y: 603
-        width: 704
+        width: 705
         height: 665
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,10 +178,10 @@ TextureImporter:
         serializedVersion: 2
         x: 1229
         y: 894
-        width: 166
+        width: 167
         height: 333
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -199,11 +199,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 348
-        y: 656
+        y: 657
         width: 200
-        height: 541
+        height: 188
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -220,12 +220,12 @@ TextureImporter:
       name: Player3_4
       rect:
         serializedVersion: 2
-        x: 1229
-        y: 739
-        width: 170
-        height: 154
+        x: 372
+        y: 828
+        width: 168
+        height: 369
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -242,12 +242,12 @@ TextureImporter:
       name: Player3_5
       rect:
         serializedVersion: 2
-        x: 583
-        y: 448
-        width: 334
-        height: 230
+        x: 1229
+        y: 739
+        width: 169
+        height: 154
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -264,12 +264,12 @@ TextureImporter:
       name: Player3_6
       rect:
         serializedVersion: 2
-        x: 946
-        y: 455
-        width: 292
-        height: 258
+        x: 583
+        y: 447
+        width: 333
+        height: 231
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -286,12 +286,12 @@ TextureImporter:
       name: Player3_7
       rect:
         serializedVersion: 2
-        x: 964
-        y: 297
-        width: 270
-        height: 168
+        x: 946
+        y: 455
+        width: 293
+        height: 258
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -308,12 +308,12 @@ TextureImporter:
       name: Player3_8
       rect:
         serializedVersion: 2
-        x: 619
-        y: 270
-        width: 287
-        height: 183
+        x: 964
+        y: 297
+        width: 269
+        height: 168
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -326,11 +326,33 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player3_9
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 269
+        width: 286
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 578b6c7a528e61ef0800000000000000
+      internalID: -137667490161969035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5c9c21d256cbdc74ba8be9e3c449ad98
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -338,9 +360,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
       Player3_0: -2474250949257483082
       Player3_1: -2651039445283772561
@@ -351,6 +371,7 @@ TextureImporter:
       Player3_6: -1743896084069932923
       Player3_7: 7261982912586501598
       Player3_8: 7261346908197745683
+      Player3_9: -137667490161969035
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
