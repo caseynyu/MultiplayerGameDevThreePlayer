@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 985797861024197858}
   - component: {fileID: 2930102636665765576}
   m_Layer: 0
-  m_Name: SquareBlock
+  m_Name: TriBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7137693002619246245}
   - component: {fileID: 7136622373857338401}
-  - component: {fileID: 6227481816604902824}
+  - component: {fileID: 7662044000282250667}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -106,8 +106,8 @@ Transform:
   m_GameObject: {fileID: 5635593796450887619}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.025, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalPosition: {x: -0.5326, y: -0.2073, z: 0}
+  m_LocalScale: {x: 0.4177757, y: 0.4177757, z: 0.4177757}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4988631721711406031}
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1827464971915947752, guid: 059cf39df31fab5499c8d31927dcda3b, type: 3}
+  m_Sprite: {fileID: -6581868903419895801, guid: 73d471f98869a4c4c88846627dd0e2a9, type: 3}
   m_Color: {r: 0.34901962, g: 0.5294118, b: 0.8, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -172,8 +172,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!61 &6227481816604902824
-BoxCollider2D:
+--- !u!60 &7662044000282250667
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -210,14 +210,65 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.6603484, y: 2.53}
+    oldSize: {x: 2.680351, y: 2.53}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.6603484, y: 2.53}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.032015774, y: -1.216233}
+      - {x: 0.032015774, y: -1.204708}
+      - {x: 0.28556463, y: -1.2392828}
+      - {x: 0.4008141, y: -1.2392828}
+      - {x: 0.5275885, y: -1.2277579}
+      - {x: 0.60826313, y: -1.204708}
+      - {x: 0.6889378, y: -1.2277579}
+      - {x: 0.8963868, y: -1.2277579}
+      - {x: 1.1614606, y: -1.1701331}
+      - {x: 1.2882351, y: -1.1701331}
+      - {x: 1.3458598, y: -1.1009835}
+      - {x: 1.3458598, y: -0.985734}
+      - {x: 1.29976, y: -0.7321852}
+      - {x: 1.2882351, y: -0.547786}
+      - {x: 1.27671, y: -0.49016127}
+      - {x: 1.27671, y: -0.10983801}
+      - {x: 1.2651851, y: -0.052213274}
+      - {x: 1.2536602, y: 0.028461358}
+      - {x: 1.27671, y: 0.10913599}
+      - {x: 1.27671, y: 0.22438547}
+      - {x: 1.2651851, y: 0.6969083}
+      - {x: 1.2421353, y: 0.9619821}
+      - {x: 1.2421353, y: 1.1002815}
+      - {x: 1.2190853, y: 1.204006}
+      - {x: 1.1729856, y: 1.2385808}
+      - {x: 1.0462111, y: 1.2731557}
+      - {x: 1.0116363, y: 1.2731557}
+      - {x: 0.93096167, y: 1.2270559}
+      - {x: 0.8157122, y: 1.1348563}
+      - {x: 0.6889378, y: 1.0196068}
+      - {x: 0.5736883, y: 0.9158823}
+      - {x: 0.5045386, y: 0.8582576}
+      - {x: 0.2625147, y: 0.60470873}
+      - {x: 0.2625147, y: 0.59318376}
+      - {x: -0.025608962, y: 0.3050601}
+      - {x: -0.16390833, y: 0.15523578}
+      - {x: -0.18695822, y: 0.15523578}
+      - {x: -0.452032, y: -0.10983801}
+      - {x: -0.671006, y: -0.34033695}
+      - {x: -1.1665788, y: -0.84743464}
+      - {x: -1.2472534, y: -0.9396342}
+      - {x: -1.3279281, y: -1.0433588}
+      - {x: -1.3279281, y: -1.1240333}
+      - {x: -1.316403, y: -1.1586082}
+      - {x: -1.2587783, y: -1.1816581}
+      - {x: -1.1896286, y: -1.204708}
+      - {x: -1.0282794, y: -1.204708}
+      - {x: -0.88998, y: -1.2392828}
+      - {x: -0.46355698, y: -1.2392828}
+      - {x: -0.3252576, y: -1.216233}
+  m_UseDelaunayMesh: 1
 --- !u!1001 &6579359956289363604
 PrefabInstance:
   m_ObjectHideFlags: 0
