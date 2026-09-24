@@ -17,6 +17,8 @@ public class BlockSystem : MonoBehaviour
 
     Dictionary<GameObject, BuildingPreview> cursorToPreview = new Dictionary<GameObject, BuildingPreview>();
 
+    private GameObject redSelectedBlockClickObject,greenSelectedBlockClickObject,blueSlectedBlockClickObject;
+
     private void Update()
     {
         //Vector3 mousePos = MosuePositionToWorldPosition();
@@ -49,11 +51,12 @@ public class BlockSystem : MonoBehaviour
         }
     }
 
-    public void SwitchBlock(BlockData blockData, String cursorColor)
+    public void SwitchBlock(BlockData blockData, String cursorColor, GameObject blockClickObject)
     {
         if (cursorColor == "Red")
         {
-            Debug.Log("Red Click");
+            //Debug.Log("Red Click");
+            redSelectedBlockClickObject = blockClickObject;
             if (redPreview != null)
             {
                 Destroy(redPreview.gameObject);
@@ -63,7 +66,8 @@ public class BlockSystem : MonoBehaviour
         }
         if (cursorColor == "Green")
         {
-            Debug.Log("Green Click");
+            //Debug.Log("Green Click");
+            greenSelectedBlockClickObject = blockClickObject;
             if (greenPreview != null)
             {
                 Destroy(greenPreview.gameObject);
@@ -73,7 +77,8 @@ public class BlockSystem : MonoBehaviour
         }
         if (cursorColor == "Blue")
         {
-            Debug.Log("Blue Click");
+            //Debug.Log("Blue Click");
+            blueSlectedBlockClickObject = blockClickObject;
             if (bluePreview != null)
             {
                 Destroy(bluePreview.gameObject);
@@ -106,16 +111,31 @@ public class BlockSystem : MonoBehaviour
             {
                 Debug.Log("gamepad0pressed");
                 PlaceBlock(buildPositions,preview);
+                Destroy(redSelectedBlockClickObject);
+            }
+            if (Gamepad.all[0].buttonWest.wasPressedThisFrame && preview == redPreview)
+            {
+                preview.Rotate(90);
             }
             if (Gamepad.all[1].buttonSouth.wasPressedThisFrame && preview == greenPreview)
             {
                 Debug.Log("gamepad1pressed");
                 PlaceBlock(buildPositions,preview);
+                Destroy(greenSelectedBlockClickObject);
+            }
+            if (Gamepad.all[1].buttonWest.wasPressedThisFrame && preview == greenPreview)
+            {
+                preview.Rotate(90);
             }
             if (Gamepad.all[2].buttonSouth.wasPressedThisFrame && preview == bluePreview)
             {
                 Debug.Log("gamepad2pressed");
                 PlaceBlock(buildPositions,preview);
+                Destroy(blueSlectedBlockClickObject);
+            }
+            if (Gamepad.all[2].buttonWest.wasPressedThisFrame && preview == bluePreview)
+            {
+                preview.Rotate(90);
             }
         }
         else

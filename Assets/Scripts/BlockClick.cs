@@ -16,15 +16,15 @@ public class BlockClick : MonoBehaviour,IPointerClickHandler
     {
         if(gameManager.lastPressedGamepadMouse==0)
         {
-            blockSystem.SwitchBlock(blockData,"Red");
+            blockSystem.SwitchBlock(blockData,"Red",gameObject);
         }
         if(gameManager.lastPressedGamepadMouse==1)
         {
-            blockSystem.SwitchBlock(blockData,"Green");
+            blockSystem.SwitchBlock(blockData,"Green",gameObject);
         }
         if(gameManager.lastPressedGamepadMouse==2)
         {
-            blockSystem.SwitchBlock(blockData,"Blue");
+            blockSystem.SwitchBlock(blockData,"Blue",gameObject);
         }
     }
 
