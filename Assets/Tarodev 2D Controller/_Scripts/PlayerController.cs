@@ -140,7 +140,7 @@ namespace TarodevController
             HandleJump();
             HandleDirection();
             HandleGravity();
-            
+            HandleWallSlide();
             ApplyMovement();
         }
 
@@ -158,10 +158,27 @@ namespace TarodevController
             Physics2D.queriesStartInColliders = false;
 
             // Ground and Ceiling
-            bool groundHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.down, _stats.GrounderDistance, ~_stats.PlayerLayer);
-            bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.PlayerLayer);
+            RaycastHit2D groundHit = Physics2D.CapsuleCast(
+    _col.bounds.center,
+    _col.size,
+    _col.direction,
+    0,
+    Vector2.down,
+    _stats.GrounderDistance,
+    ~_stats.PlayerLayer
+);
 
-            // Hit a Ceiling
+bool groundDetected = groundHit.collider != null;
+//check if you're on ice:
+_onIce =
+    groundDetected &&
+    groundHit.collider.gameObject.CompareTag("Ice");
+//Ceiling detection
+ bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.PlayerLayer);
+//walls			
+bool leftWallHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.left, _stats.GrounderDistance, ~_stats.PlayerLayer); 
+			bool rightWallHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.right, _stats.GrounderDistance, ~_stats.PlayerLayer);    
+			// Hit a Ceiling
             if (ceilingHit) _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);
 
             // Landed on the Ground
@@ -211,17 +228,53 @@ namespace TarodevController
         private bool HasBufferedJump => _bufferedJumpUsable && _time < _timeJumpWasPressed + _stats.JumpBuffer;
         private bool CanUseCoyote => _coyoteUsable && !_grounded && _time < _frameLeftGrounded + _stats.CoyoteTime;
 
-        private void HandleJump()
-        {
-            if (!_endedJumpEarly && !_grounded && !_frameInput.JumpHeld && _rb.linearVelocity.y > 0) _endedJumpEarly = true;
+private void HandleJump()
+{
+    if (!_endedJumpEarly &&
+        !_grounded &&
+        !_frameInput.JumpHeld &&
+        _rb.linearVelocity.y > 0)
+    {
+        _endedJumpEarly = true;
+    }
 
-            if (!_jumpToConsume && !HasBufferedJump) return;
+    if (!_jumpToConsume && !HasBufferedJump)
+        return;
 
-            if (_grounded || CanUseCoyote) ExecuteJump();
+    if (_onWall)
+    {
+        ExecuteWallJump();
+    }
+    else if (_grounded || CanUseCoyote)
+    {
+        ExecuteJump();
+    }
 
-            _jumpToConsume = false;
-        }
+    _jumpToConsume = false;
+}
+private void HandleWallSlide()
+{
+    if (_onWall && _frameVelocity.y < 0f)
+    {
+        _frameVelocity.y = Mathf.Max(
+            _frameVelocity.y,
+            -_stats.WallSlideSpeed
+        );
+    }
+}
+private void ExecuteWallJump()
+{
+    _endedJumpEarly = false;
+    _timeJumpWasPressed = 0;
+    _bufferedJumpUsable = false;
+    _coyoteUsable = false;
 
+    // Multiply by negative wall direction to move away from the wall.
+    _frameVelocity.x = -_wallDirection * _stats.WallJumpPower.x;
+    _frameVelocity.y = _stats.WallJumpPower.y;
+
+    Jumped?.Invoke();
+}
         private void ExecuteJump()
         {
             _endedJumpEarly = false;
