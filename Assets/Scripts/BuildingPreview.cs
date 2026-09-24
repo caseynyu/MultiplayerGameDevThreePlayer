@@ -14,14 +14,14 @@ public class BuildingPreview : MonoBehaviour
     public BlockData Data {get;private set;}
     public BlockSprite BlockSprite  {get;private set;}
     private List<Renderer> renderers = new();
-    private List<Collider2D> colliders = new();
+    private List<Collider> colliders = new();
 
     public void Setup(BlockData data)
     {
         Data = data;
         BlockSprite = Instantiate(data.Sprite,transform.position,Quaternion.identity,transform);
         renderers.AddRange(BlockSprite.GetComponentsInChildren<Renderer>());
-        colliders.AddRange(BlockSprite.GetComponentsInChildren<Collider2D>());
+        colliders.AddRange(BlockSprite.GetComponentsInChildren<Collider>());
         foreach (var col in colliders)
         {
             col.enabled = false;
