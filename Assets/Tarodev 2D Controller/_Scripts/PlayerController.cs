@@ -168,7 +168,8 @@ namespace TarodevController
     ~_stats.PlayerLayer
 );
 
-            bool groundDetected = groundHit.collider != null;
+            // Do not re-ground on the spring while the launch is still moving upward.
+            bool groundDetected = groundHit.collider != null && (!_springLaunched || _frameVelocity.y <= 0f);
             //check if you're on ice:
             _onIce =
                 groundDetected &&
@@ -178,12 +179,14 @@ namespace TarodevController
             //walls			
             bool leftWallHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.left, _stats.GrounderDistance, ~_stats.PlayerLayer); 
 			bool rightWallHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.right, _stats.GrounderDistance, ~_stats.PlayerLayer);
-            if(leftWallHit || rightWallHit && !_grounded) _onWall=true;
+            // Use this tick's ground result and clear wall contact when we leave it.
+            _onWall = !groundDetected && (leftWallHit || rightWallHit);
+            _wallDirection = _onWall ? (leftWallHit ? -1 : 1) : 0;
 			// Hit a Ceiling
             if (ceilingHit) _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);
 
             // Landed on the Ground
-            if (!_grounded && groundHit)
+            if (!_grounded && groundDetected)
             {
                 _grounded = true;
                 _coyoteUsable = true;
@@ -192,11 +195,18 @@ namespace TarodevController
                 GroundedChanged?.Invoke(true, Mathf.Abs(_frameVelocity.y));
             }
             // Left the Ground
-            else if (_grounded && !groundHit)
+            else if (_grounded && !groundDetected)
             {
                 _grounded = false;
                 _frameLeftGrounded = _time;
                 GroundedChanged?.Invoke(false, 0);
+            }
+
+            if (groundDetected && _frameVelocity.y <= 0f)
+            {
+                var spring = groundHit.collider.GetComponent<SpringBlock>();
+                if (spring != null && spring.isActiveAndEnabled)
+                    LaunchFromSpring(spring.JumpHeightMultiplier);
             }
 
             Physics2D.queriesStartInColliders = _cachedQueryStartInColliders;
@@ -213,6 +223,28 @@ namespace TarodevController
             {
                 gameManager.PlayerWin(gameObject);
             }
+            if (collision.gameObject.CompareTag("RedWin"))
+            {
+                if (currentGamepad == Gamepad.all[0])
+                {
+                    gameManager.PlayerWin(gameObject);
+                }
+            }
+            if (collision.gameObject.CompareTag("GreenWin"))
+            {
+                if (currentGamepad == Gamepad.all[1])
+                {
+                    gameManager.PlayerWin(gameObject);
+                }
+            }
+            if (collision.gameObject.CompareTag("BlueWin"))
+            {
+                if (currentGamepad == Gamepad.all[2])
+                {
+                    gameManager.PlayerWin(gameObject);
+                }
+            }
+            
         }
 
         #endregion
@@ -223,6 +255,7 @@ namespace TarodevController
         private bool _jumpToConsume;
         private bool _bufferedJumpUsable;
         private bool _endedJumpEarly;
+        private bool _springLaunched;
         private bool _coyoteUsable;
         private float _timeJumpWasPressed;
 
@@ -231,6 +264,17 @@ namespace TarodevController
 
 private void HandleJump()
 {
+    if (_springLaunched)
+    {
+        // Springs give a full bounce even when jump is released or pressed on landing.
+        if (_frameVelocity.y > 0f)
+        {
+            _jumpToConsume = false;
+            return;
+        }
+        _springLaunched = false;
+    }
+
     if (!_endedJumpEarly &&
         !_grounded &&
         !_frameInput.JumpHeld &&
@@ -276,6 +320,27 @@ private void ExecuteWallJump()
 
     Jumped?.Invoke();
 }
+        private void LaunchFromSpring(float heightMultiplier)
+        {
+            _springLaunched = true;
+            _endedJumpEarly = false;
+            _jumpToConsume = false;
+            _timeJumpWasPressed = float.NegativeInfinity;
+            _bufferedJumpUsable = false;
+            _coyoteUsable = false;
+            _onWall = false;
+            _onIce = false;
+            if (_grounded)
+            {
+                _grounded = false;
+                _frameLeftGrounded = _time;
+                GroundedChanged?.Invoke(false, 0f);
+            }
+            // Height scales with velocity squared, so 2.5x height needs sqrt(2.5)x speed.
+            _frameVelocity.y = _stats.JumpPower * Mathf.Sqrt(Mathf.Max(1f, heightMultiplier));
+            Jumped?.Invoke();
+        }
+
         private void ExecuteJump()
         {
             _endedJumpEarly = false;
@@ -292,14 +357,17 @@ private void ExecuteWallJump()
 
         private void HandleDirection()
         {
+            bool groundedOnIce = _grounded && _onIce;
             if (_frameInput.Move.x == 0)
             {
-                var deceleration = _grounded ? _stats.GroundDeceleration : _stats.AirDeceleration;
+                var deceleration = !_grounded ? _stats.AirDeceleration
+                    : groundedOnIce ? _stats.IceDeceleration : _stats.GroundDeceleration;
                 _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, 0, deceleration * Time.fixedDeltaTime);
             }
             else
             {
-                _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _stats.MaxSpeed, _stats.Acceleration * Time.fixedDeltaTime);
+                var acceleration = groundedOnIce ? _stats.IceAcceleration : _stats.Acceleration;
+                _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameInput.Move.x * _stats.MaxSpeed, acceleration * Time.fixedDeltaTime);
             }
         }
 

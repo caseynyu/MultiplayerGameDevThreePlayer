@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 1361177676943767763}
   m_Layer: 0
   m_Name: Win Circle
-  m_TagString: Win
+  m_TagString: BlueWin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -30,3 +30,7 @@ MonoBehaviour:
   JumpEndEarlyGravityModifier: 3
   CoyoteTime: 0.15
   JumpBuffer: 0.2
+  WallSlideSpeed: 2
+  WallJumpPower: {x: 12, y: 18}
+  IceAcceleration: 20
+  IceDeceleration: 1

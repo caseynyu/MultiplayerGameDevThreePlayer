@@ -7,6 +7,9 @@ TagManager:
   - Spike
   - Win
   - Ice
+  - RedWin
+  - BlueWin
+  - GreenWin
   layers:
   - Default
   - TransparentFX
