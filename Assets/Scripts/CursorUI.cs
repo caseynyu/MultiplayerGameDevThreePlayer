@@ -39,15 +39,12 @@ public class CursorUI : MonoBehaviour
         // 3. Handle Pointer Enter / Exit (Hover States)
         HandleHoverStates(hitObject);
 
-        Gamepad gamepad = Gamepad.current;
-        if (gamepad == null) return;
-
         // 4. Handle Clicks (Replace with your custom input system checking, e.g., Gamepad Button South)
-        if (gamepad.buttonSouth.wasPressedThisFrame)
+        if (Gamepad.current.buttonSouth.wasPressedThisFrame) 
         {
             TriggerPointerDown(hitObject);
         }
-        if (gamepad.buttonSouth.wasReleasedThisFrame)
+        if (Gamepad.current.buttonSouth.wasReleasedThisFrame)
         {
             TriggerPointerUp(hitObject);
         }
