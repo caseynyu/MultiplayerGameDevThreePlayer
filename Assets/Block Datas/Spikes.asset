@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949b9827740c9744d8e3d39019ead214, type: 3}
-  m_Name: BlockData2
+  m_Name: Spikes
   m_EditorClassIdentifier: Assembly-CSharp::BlockData
-  <Sprite>k__BackingField: {fileID: 2930102636665765576, guid: 399214c8e4937154bbd7a6aeb64b424e, type: 3}
+  <Sprite>k__BackingField: {fileID: 2930102636665765576, guid: 2111f0158c8659f459252c752c335f19, type: 3}
