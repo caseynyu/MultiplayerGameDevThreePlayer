@@ -44,9 +44,12 @@ public class CursorBehavior : MonoBehaviour
                 }
             }
         }*/
-        Vector2 move = Gamepad.all[0].leftStick.ReadValue();
+        Gamepad gamepad = GameManager.GetGamepad(0);
+        if (gamepad == null) return;
+
+        Vector2 move = gamepad.leftStick.ReadValue();
         cursorSprite.transform.Translate(move * Time.deltaTime * moveSpeed);
-        if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+        if (gamepad.buttonSouth.wasPressedThisFrame)
         {
             GameObject clickedUIObject = GetUIObjectAtScreenPosition(cursorSprite.transform.position);
 
