@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
         Results
     }
     private GameStates currentGameState;
-    public bool IsBuilding => currentGameState == GameStates.Building;
 
     private void Start()
     {
@@ -45,41 +44,27 @@ public class GameManager : MonoBehaviour
         buildingUI.SetActive(true);
         playingUI.SetActive(false);
         ResetLevel();
-        // Assign each available controller independently so solo testing works too.
-        playerRedGamepad = GetGamepad(0);
-        playerGreenGamepad = GetGamepad(1);
-        playerBlueGamepad = GetGamepad(2);
-        AssignCursorGamepad(redActions, playerRedGamepad);
-        AssignCursorGamepad(greenActions, playerGreenGamepad);
-        AssignCursorGamepad(blueActions, playerBlueGamepad);
-    }
-
-    public static Gamepad GetGamepad(int index)
-    {
-        return index >= 0 && index < Gamepad.all.Count ? Gamepad.all[index] : null;
-    }
-
-    private static void AssignCursorGamepad(InputActionAsset actions, Gamepad gamepad)
-    {
-        // An empty device list prevents an unassigned cursor from using another player's pad.
-        actions.devices = gamepad != null
-            ? new InputDevice[] { gamepad }
-            : System.Array.Empty<InputDevice>();
+        //redCursor.GetComponent<PlayerInput>().user.PerformPairingWithDevice(Gamepad.all[0]);
+        //PlayButton();
+        redActions.devices = new[] {Gamepad.all[0]};
+        blueActions.devices = new[] {Gamepad.all[2]};
+        greenActions.devices = new[] {Gamepad.all[1]};
+        //Debug.Log(redActions.devices);
+        //redCursor.GetComponent<VirtualMouseInput>().stickAction.action;
+        if(Gamepad.all.Count > 2)
+        {
+            playerRedGamepad = Gamepad.all[0];
+            playerBlueGamepad = Gamepad.all[2];
+            playerGreenGamepad = Gamepad.all[1];
+        }
+        else
+        {
+            Debug.Log("Not enough controllers connected");
+        }
     }
 
     private void Update()
     {
-        if (IsBuilding)
-        {
-            foreach (var gamepad in Gamepad.all)
-            {
-                if (gamepad.startButton.wasPressedThisFrame)
-                {
-                    PlayButton();
-                    break;
-                }
-            }
-        }
         if (currentGameState == GameStates.Playing)
         {
             gameTimer+=Time.deltaTime;
@@ -114,25 +99,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayButton()
     {
-        if (!IsBuilding) return;
-        if (redBlock == null || greenBlock == null || blueBlock == null)
-        {
-            statusText.text = "Waiting for the starting platform.";
-            statusTextOn = true;
-            return;
-        }
-        if (Gamepad.all.Count == 0)
-        {
-            statusText.text = "Connect a controller to start.";
-            statusTextOn = true;
-            return;
-        }
-        playerRedGamepad = GetGamepad(0);
-        playerGreenGamepad = GetGamepad(1);
-        playerBlueGamepad = GetGamepad(2);
         currentGameState=GameStates.Playing;
-        gameTimer = 0;
-        blockSystem.StopBuilding();
         buildingUI.SetActive(false);
         playingUI.SetActive(true);
         PlayerSpawn();
@@ -150,21 +117,20 @@ public class GameManager : MonoBehaviour
 
     private void PlayerSpawn()
     {
-        playerRed = SpawnPlayer(redPlayerPrefab, redBlock, playerRedGamepad);
-        playerGreen = SpawnPlayer(greenPlayerPrefab, greenBlock, playerGreenGamepad);
-        playerBlue = SpawnPlayer(bluePlayerPrefab, blueBlock, playerBlueGamepad);
-    }
+        spawnPosRed=redBlock.position + new Vector3(0,spawnOffset,0);
+        spawnPosBlue=blueBlock.position + new Vector3(0,spawnOffset,0);
+        spawnPosGreen=greenBlock.position + new Vector3(0,spawnOffset,0);
+        playerGreen = GameObject.Instantiate(greenPlayerPrefab,spawnPosGreen,Quaternion.identity);
+        playerRed = GameObject.Instantiate(redPlayerPrefab,spawnPosRed,Quaternion.identity);
+        playerBlue = GameObject.Instantiate(bluePlayerPrefab,spawnPosBlue,Quaternion.identity);
+        playerRed.GetComponent<PlayerController>().currentGamepad = playerRedGamepad;
+        playerBlue.GetComponent<PlayerController>().currentGamepad = playerBlueGamepad;
+        playerGreen.GetComponent<PlayerController>().currentGamepad = playerGreenGamepad;
+        playerRed.GetComponent<PlayerController>().gameManager = this;
+        playerGreen.GetComponent<PlayerController>().gameManager = this;
+        playerBlue.GetComponent<PlayerController>().gameManager = this;
 
-    private GameObject SpawnPlayer(GameObject prefab, Transform spawn, Gamepad gamepad)
-    {
-        if (gamepad == null) return null;
-        var player = Instantiate(prefab, spawn.position + Vector3.up * spawnOffset, Quaternion.identity);
-        var controller = player.GetComponent<PlayerController>();
-        controller.currentGamepad = gamepad;
-        controller.gameManager = this;
-        return player;
     }
-
     public void Death(GameObject playerDied)
     {
         if (playerDied == playerRed)
