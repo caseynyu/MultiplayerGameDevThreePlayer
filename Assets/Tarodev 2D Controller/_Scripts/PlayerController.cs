@@ -225,8 +225,10 @@ namespace TarodevController
             }
             if (collision.gameObject.CompareTag("RedWin"))
             {
+                Debug.Log("test1");
                 if (currentGamepad == Gamepad.all[0])
                 {
+                    Debug.Log("test2");
                     gameManager.PlayerWin(gameObject);
                 }
             }

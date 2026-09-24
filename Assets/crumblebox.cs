@@ -23,6 +23,6 @@ public class CrumblingPlatform : MonoBehaviour
     {
         yield return new WaitForSeconds(crumbleDelay);
 
-        Destroy(gameObject);
+        Destroy(gameObject.transform.parent.gameObject);
     }
 }

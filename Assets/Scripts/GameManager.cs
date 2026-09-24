@@ -185,6 +185,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerWon == playerRed)
         {
+            Debug.Log("test3");
             RedWin();
         }
         if (playerWon == playerGreen)
@@ -231,6 +232,7 @@ public class GameManager : MonoBehaviour
     }
     public void RedWin()
     {
+        Debug.Log("test4");
         Destroy(playerRed);
         statusText.text = "Red Player Won!";
         statusTextOn=true;

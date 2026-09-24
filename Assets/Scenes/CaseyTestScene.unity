@@ -1447,7 +1447,7 @@ MonoBehaviour:
   redActions: {fileID: -944628639613478452, guid: c713c5e775e34584fa5ec8d32d3e982e, type: 3}
   greenActions: {fileID: -944628639613478452, guid: ad457ac03fee0a749a2e349b5eb1758c, type: 3}
   blueActions: {fileID: -944628639613478452, guid: 964057424240ad247ac9623878531bc0, type: 3}
-  disableCursor: 0
+  disableCursor: 1
   placebaleBlocksPrefabs:
   - {fileID: 8478082015304198743, guid: baff937848b43d844b25dd6a0b1591c8, type: 3}
   - {fileID: 2188026750813550294, guid: 66e6903a60b966749b37922bfac035ea, type: 3}
