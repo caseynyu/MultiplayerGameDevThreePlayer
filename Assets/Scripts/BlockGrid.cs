@@ -54,20 +54,23 @@ public class BlockGrid : MonoBehaviour
         block.Setup(startPrefab,0);
         SetBuilding(block,blockPositions);
         blockPositions.Clear();
-
+        SetEnds();
+    }
         //set ends
-
+    private void SetEnds()
+    {
         List<BlockData> endPrefabs = new List<BlockData>();
         endPrefabs.Add(redEndPrefab);
         endPrefabs.Add(blueEndPrefab);
         endPrefabs.Add(greenEndPrefab);
 
-        randomX = UnityEngine.Random.Range(0,width);
+        int randomX = UnityEngine.Random.Range(0,width);
         int randomY = UnityEngine.Random.Range(4,9);
-        startPos = new Vector3(.5f+transform.position.x+randomX*BlockSystem.CellSize,.5f+transform.position.x+randomY*BlockSystem.CellSize);
+        List<Vector3> blockPositions = new List<Vector3>();
+        Vector3 startPos = new Vector3(.5f+transform.position.x+randomX*BlockSystem.CellSize,.5f+transform.position.x+randomY*BlockSystem.CellSize);
         blockPositions.Add(startPos);
         int randomEndBlock = UnityEngine.Random.Range(0,endPrefabs.Count-1);
-        block = Instantiate(block,startPos,Quaternion.identity);
+        Block block = Instantiate(blockPrefab,startPos,Quaternion.identity);
         block.Setup(endPrefabs[randomEndBlock],0);
         endPrefabs.RemoveAt(randomEndBlock);
         SetBuilding(block,blockPositions);
@@ -80,7 +83,7 @@ public class BlockGrid : MonoBehaviour
         startPos = new Vector3(.5f+transform.position.x+randomX*BlockSystem.CellSize,.5f+transform.position.x+randomY*BlockSystem.CellSize);
         blockPositions.Add(startPos);
         randomEndBlock = UnityEngine.Random.Range(0,endPrefabs.Count-1);
-        block = Instantiate(block,startPos,Quaternion.identity);
+        block = Instantiate(blockPrefab,startPos,Quaternion.identity);
         block.Setup(endPrefabs[randomEndBlock],0);
         endPrefabs.RemoveAt(randomEndBlock);
         SetBuilding(block,blockPositions);
@@ -93,14 +96,16 @@ public class BlockGrid : MonoBehaviour
         startPos = new Vector3(.5f+transform.position.x+randomX*BlockSystem.CellSize,.5f+transform.position.x+randomY*BlockSystem.CellSize);
         blockPositions.Add(startPos);
         randomEndBlock = UnityEngine.Random.Range(0,endPrefabs.Count-1);
-        block = Instantiate(block,startPos,Quaternion.identity);
+        block = Instantiate(blockPrefab,startPos,Quaternion.identity);
         block.Setup(endPrefabs[randomEndBlock],0);
         endPrefabs.RemoveAt(randomEndBlock);
         SetBuilding(block,blockPositions);
         blockPositions.Clear();
+    }
 
         
 
+        
 
         /*//Vector2 startPos = transform.position;
         int randomX = UnityEngine.Random.Range(2,width-2);
@@ -142,7 +147,7 @@ public class BlockGrid : MonoBehaviour
         block = Instantiate(blockPrefab,startPos,Quaternion.identity);
         block.Setup(endPrefab,0);
         SetBuilding(block,blockPositions);*/
-    }
+    
 
     /*private void SpawnBlock(float xRangeStart, float xRangeEnd, float yRangeStart, float yRangeEnd)
     {
@@ -193,6 +198,7 @@ public class BlockGrid : MonoBehaviour
     {
         foreach (var position in allBuildingPositions)
         {
+            //Debug.Log(position);
             (int x,int y) = WorldToGridPosition(position);
             grid[x,y].SetBlock(block);
         }
