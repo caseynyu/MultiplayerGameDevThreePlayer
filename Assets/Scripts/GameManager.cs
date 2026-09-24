@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject redCursor,blueCursor,greenCursor;
     private Vector3 spawnPosRed,spawnPosBlue,spawnPosGreen;
     [SerializeField] InputActionAsset redActions,greenActions,blueActions;
+    [SerializeField] private bool disableCursor=false;
 
     public int lastPressedGamepadMouse;
 
@@ -35,7 +36,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible=false;
+        if(disableCursor)Cursor.visible=false;
+        
         
         currentGameState=GameStates.Building;
         statusText.gameObject.SetActive(false);

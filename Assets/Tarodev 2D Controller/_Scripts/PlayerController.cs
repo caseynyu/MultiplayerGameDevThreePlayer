@@ -168,16 +168,17 @@ namespace TarodevController
     ~_stats.PlayerLayer
 );
 
-bool groundDetected = groundHit.collider != null;
-//check if you're on ice:
-_onIce =
-    groundDetected &&
-    groundHit.collider.gameObject.CompareTag("Ice");
-//Ceiling detection
- bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.PlayerLayer);
-//walls			
-bool leftWallHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.left, _stats.GrounderDistance, ~_stats.PlayerLayer); 
-			bool rightWallHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.right, _stats.GrounderDistance, ~_stats.PlayerLayer);    
+            bool groundDetected = groundHit.collider != null;
+            //check if you're on ice:
+            _onIce =
+                groundDetected &&
+                groundHit.collider.gameObject.CompareTag("Ice");
+            //Ceiling detection
+            bool ceilingHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.up, _stats.GrounderDistance, ~_stats.PlayerLayer);
+            //walls			
+            bool leftWallHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.left, _stats.GrounderDistance, ~_stats.PlayerLayer); 
+			bool rightWallHit = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.right, _stats.GrounderDistance, ~_stats.PlayerLayer);
+            if(leftWallHit || rightWallHit && !_grounded) _onWall=true;
 			// Hit a Ceiling
             if (ceilingHit) _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);
 
