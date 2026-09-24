@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
+using UnityEngine.EventSystems;
+using System;
 
 public class BlockSystem : MonoBehaviour
 {
@@ -11,18 +12,31 @@ public class BlockSystem : MonoBehaviour
     [SerializeField] private BuildingPreview previewPrefab;
     [SerializeField] private Block blockPrefab;
     [SerializeField] private BlockGrid grid;
-    private BuildingPreview preview;
+    [SerializeField] GameObject redMouseCursor,blueMouseCursor,greenMouseCursor;
+    private BuildingPreview redPreview,bluePreview,greenPreview;
+
+    Dictionary<GameObject, BuildingPreview> cursorToPreview = new Dictionary<GameObject, BuildingPreview>();
+
+    private GameObject redSelectedBlockClickObject,greenSelectedBlockClickObject,blueSlectedBlockClickObject;
 
     private void Update()
     {
-        Vector3 mousePos = MosuePositionToWorldPosition();
-        if (preview != null)
+        //Vector3 mousePos = MosuePositionToWorldPosition();
+        if (redPreview != null)
         {
-            HandlePreview(mousePos);
+            HandlePreview(redMouseCursor.transform.position,redPreview);
+        }
+        if (greenPreview != null)
+        {
+            HandlePreview(greenMouseCursor.transform.position,greenPreview);
+        }
+        if (bluePreview != null)
+        {
+            HandlePreview(blueMouseCursor.transform.position,bluePreview);
         }
         else
         {
-            if (Keyboard.current.digit1Key.wasPressedThisFrame)
+            /*if (Keyboard.current.digit1Key.wasPressedThisFrame)
             {
                 preview = CreatePreview(blockData1,mousePos);
             }
@@ -33,18 +47,46 @@ public class BlockSystem : MonoBehaviour
             if (Keyboard.current.digit3Key.wasPressedThisFrame)
             {
                 preview = CreatePreview(blockData3,mousePos);
-            }
+            }*/
         }
     }
 
-    public void SwitchBlock(BlockData blockData)
+    public void SwitchBlock(BlockData blockData, String cursorColor, GameObject blockClickObject)
     {
-        if (preview != null)
+        if (cursorColor == "Red")
         {
-            Destroy(preview.gameObject);
-            preview=null;
+            //Debug.Log("Red Click");
+            redSelectedBlockClickObject = blockClickObject;
+            if (redPreview != null)
+            {
+                Destroy(redPreview.gameObject);
+                redPreview=null;
+            }
+            redPreview = CreatePreview(blockData,redMouseCursor.transform.position);
         }
-        preview = CreatePreview(blockData,MosuePositionToWorldPosition());
+        if (cursorColor == "Green")
+        {
+            //Debug.Log("Green Click");
+            greenSelectedBlockClickObject = blockClickObject;
+            if (greenPreview != null)
+            {
+                Destroy(greenPreview.gameObject);
+                greenPreview=null;
+            }
+            greenPreview = CreatePreview(blockData,greenMouseCursor.transform.position);
+        }
+        if (cursorColor == "Blue")
+        {
+            //Debug.Log("Blue Click");
+            blueSlectedBlockClickObject = blockClickObject;
+            if (bluePreview != null)
+            {
+                Destroy(bluePreview.gameObject);
+                bluePreview=null;
+            }
+            bluePreview = CreatePreview(blockData,blueMouseCursor.transform.position);
+        }
+        
         
     }
 
@@ -56,7 +98,7 @@ public class BlockSystem : MonoBehaviour
         return worldPos;
     }
 
-    private void HandlePreview(Vector3 mosuePosition)
+    private void HandlePreview(Vector3 mosuePosition, BuildingPreview preview)
     {
         preview.transform.position = mosuePosition;
         List<Vector3> buildPositions = preview.BlockSprite.GetAllBuildingPositions();
@@ -65,9 +107,35 @@ public class BlockSystem : MonoBehaviour
         {
             preview.transform.position = GetSnappedCenterPosition(buildPositions);
             preview.ChangeState(BuildingPreview.BuildingPreviewState.Positive);
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            if (Gamepad.all[0].buttonSouth.wasPressedThisFrame && preview == redPreview)
             {
-                PlaceBlock(buildPositions);
+                Debug.Log("gamepad0pressed");
+                PlaceBlock(buildPositions,preview);
+                Destroy(redSelectedBlockClickObject);
+            }
+            if (Gamepad.all[0].buttonWest.wasPressedThisFrame && preview == redPreview)
+            {
+                preview.Rotate(90);
+            }
+            if (Gamepad.all[1].buttonSouth.wasPressedThisFrame && preview == greenPreview)
+            {
+                Debug.Log("gamepad1pressed");
+                PlaceBlock(buildPositions,preview);
+                Destroy(greenSelectedBlockClickObject);
+            }
+            if (Gamepad.all[1].buttonWest.wasPressedThisFrame && preview == greenPreview)
+            {
+                preview.Rotate(90);
+            }
+            if (Gamepad.all[2].buttonSouth.wasPressedThisFrame && preview == bluePreview)
+            {
+                Debug.Log("gamepad2pressed");
+                PlaceBlock(buildPositions,preview);
+                Destroy(blueSlectedBlockClickObject);
+            }
+            if (Gamepad.all[2].buttonWest.wasPressedThisFrame && preview == bluePreview)
+            {
+                preview.Rotate(90);
             }
         }
         else
@@ -80,7 +148,7 @@ public class BlockSystem : MonoBehaviour
         }
     }
 
-    private void PlaceBlock(List<Vector3> blockPositions)
+    private void PlaceBlock(List<Vector3> blockPositions, BuildingPreview preview)
     {
         Block block = Instantiate(blockPrefab,preview.transform.position,Quaternion.identity);
         block.Setup(preview.Data,preview.BlockSprite.Rotation);

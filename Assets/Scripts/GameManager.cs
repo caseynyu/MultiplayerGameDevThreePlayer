@@ -2,6 +2,7 @@ using TarodevController;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject redPlayerPrefab,greenPlayerPrefab,bluePlayerPrefab;
     [SerializeField] private GameObject redCursor,blueCursor,greenCursor;
     private Vector3 spawnPosRed,spawnPosBlue,spawnPosGreen;
+    [SerializeField] InputActionAsset redActions,greenActions,blueActions;
+    [SerializeField] private bool disableCursor=false;
+
+    public int lastPressedGamepadMouse;
 
     enum GameStates
     {
@@ -31,22 +36,31 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (Gamepad.all.Count > 2)
-        {
-            playerRedGamepad = Gamepad.all[0];
-            playerBlueGamepad = Gamepad.all[1];
-            playerGreenGamepad = Gamepad.all[2];
-        }
-        else
-        {
-            Debug.Log("Not enough controllers connected");
-        }
+        if(disableCursor)Cursor.visible=false;
+        
+        
         currentGameState=GameStates.Building;
         statusText.gameObject.SetActive(false);
         buildingUI.SetActive(true);
         playingUI.SetActive(false);
         ResetLevel();
         //redCursor.GetComponent<PlayerInput>().user.PerformPairingWithDevice(Gamepad.all[0]);
+        //PlayButton();
+        redActions.devices = new[] {Gamepad.all[0]};
+        blueActions.devices = new[] {Gamepad.all[2]};
+        greenActions.devices = new[] {Gamepad.all[1]};
+        //Debug.Log(redActions.devices);
+        //redCursor.GetComponent<VirtualMouseInput>().stickAction.action;
+        if(Gamepad.all.Count > 2)
+        {
+            playerRedGamepad = Gamepad.all[0];
+            playerBlueGamepad = Gamepad.all[2];
+            playerGreenGamepad = Gamepad.all[1];
+        }
+        else
+        {
+            Debug.Log("Not enough controllers connected");
+        }
     }
 
     private void Update()

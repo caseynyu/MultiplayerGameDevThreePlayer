@@ -44,8 +44,9 @@ GameObject:
   m_Component:
   - component: {fileID: 985797861024197858}
   - component: {fileID: 2930102636665765576}
+  - component: {fileID: 3675652228328775421}
   m_Layer: 0
-  m_Name: RectangleBoxPlatform
+  m_Name: Crumblebox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,6 +81,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridModel
   wrapper: {fileID: 4988631721711406031}
+--- !u!114 &3675652228328775421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3804507622869924509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db1468a0663f4a54b97949b1ce48a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::cumblebox
 --- !u!1 &5293077767270846071
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +103,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5686920105486407776}
   - component: {fileID: 5749758228393129493}
-  - component: {fileID: 6299215853211159814}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -162,7 +174,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5403402469857309872, guid: ebdf0582e2f83244fbca2f33423fe8df, type: 3}
+  m_Sprite: {fileID: -6025852597204237048, guid: d5a009c6edca415489266e19eeecfaef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -173,52 +185,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!61 &6299215853211159814
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5293077767270846071}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.04066, y: 2.56}
-    newSize: {x: 7.3409615, y: 2.57}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 5.04066, y: 2.56}
-  m_EdgeRadius: 0
 --- !u!1001 &3027176642937897140
 PrefabInstance:
   m_ObjectHideFlags: 0
