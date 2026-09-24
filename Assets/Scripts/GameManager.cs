@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TarodevController;
 using TMPro;
 using UnityEngine;
@@ -24,6 +25,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] InputActionAsset redActions,greenActions,blueActions;
     [SerializeField] private bool disableCursor=false;
 
+    [SerializeField] private List<GameObject> placebaleBlocksPrefabs=new List<GameObject>();
+    private List<GameObject> placebaleBlocksPrefabsTemp=new List<GameObject>();
+    [SerializeField] private GameObject redMenu,greenMenu,blueMenu;
+
+    [SerializeField] private GameObject winButton;
+
     public int lastPressedGamepadMouse;
 
     enum GameStates
@@ -36,6 +43,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        winButton.SetActive(false);
+        placebaleBlocksPrefabsTemp = placebaleBlocksPrefabs;
         if(disableCursor)Cursor.visible=false;
         
         
@@ -61,10 +70,36 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Not enough controllers connected");
         }
+        for (int i = 0; i<4; i++)
+        {
+            int randomInt=Random.Range(0,placebaleBlocksPrefabsTemp.Count-1);
+            Instantiate(placebaleBlocksPrefabsTemp[randomInt],redMenu.transform);
+            placebaleBlocksPrefabsTemp.RemoveAt(randomInt);
+        }
+        for (int i = 0; i<4; i++)
+        {
+            int randomInt=Random.Range(0,placebaleBlocksPrefabsTemp.Count-1);
+            Instantiate(placebaleBlocksPrefabsTemp[randomInt],greenMenu.transform);
+            placebaleBlocksPrefabsTemp.RemoveAt(randomInt);
+        }
+        for (int i = 0; i<4; i++)
+        {
+            int randomInt=Random.Range(0,placebaleBlocksPrefabsTemp.Count-1);
+            Instantiate(placebaleBlocksPrefabsTemp[randomInt],blueMenu.transform);
+            placebaleBlocksPrefabsTemp.RemoveAt(randomInt);
+        }
+        
     }
 
     private void Update()
     {
+        if(currentGameState== GameStates.Building)
+        {
+            if (FindAnyObjectByType<BlockClick>() == null)
+            {
+                winButton.SetActive(true);
+            }
+        }
         if (currentGameState == GameStates.Playing)
         {
             gameTimer+=Time.deltaTime;
