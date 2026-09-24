@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool disableCursor=false;
 
     [SerializeField] private List<GameObject> placebaleBlocksPrefabs=new List<GameObject>();
-    private List<GameObject> placebaleBlocksPrefabsTemp=new List<GameObject>();
     [SerializeField] private GameObject redMenu,greenMenu,blueMenu;
 
     [SerializeField] private GameObject winButton;
@@ -40,11 +39,11 @@ public class GameManager : MonoBehaviour
         Results
     }
     private GameStates currentGameState;
+    public bool IsBuilding => currentGameState == GameStates.Building;
 
     private void Start()
     {
         winButton.SetActive(false);
-        placebaleBlocksPrefabsTemp = placebaleBlocksPrefabs;
         if(disableCursor)Cursor.visible=false;
         
         
@@ -53,52 +52,51 @@ public class GameManager : MonoBehaviour
         buildingUI.SetActive(true);
         playingUI.SetActive(false);
         ResetLevel();
-        //redCursor.GetComponent<PlayerInput>().user.PerformPairingWithDevice(Gamepad.all[0]);
-        //PlayButton();
-        redActions.devices = new[] {Gamepad.all[0]};
-        blueActions.devices = new[] {Gamepad.all[2]};
-        greenActions.devices = new[] {Gamepad.all[1]};
-        //Debug.Log(redActions.devices);
-        //redCursor.GetComponent<VirtualMouseInput>().stickAction.action;
-        if(Gamepad.all.Count > 2)
+        playerRedGamepad = GetGamepad(0);
+        playerGreenGamepad = GetGamepad(1);
+        playerBlueGamepad = GetGamepad(2);
+        AssignCursorGamepad(redActions, playerRedGamepad);
+        AssignCursorGamepad(greenActions, playerGreenGamepad);
+        AssignCursorGamepad(blueActions, playerBlueGamepad);
+        DealBlocks(redMenu, 0);
+        DealBlocks(greenMenu, 1);
+        DealBlocks(blueMenu, 2);
+    }
+
+    public static Gamepad GetGamepad(int index) => index >= 0 && index < Gamepad.all.Count ? Gamepad.all[index] : null;
+
+    private static void AssignCursorGamepad(InputActionAsset actions, Gamepad gamepad)
+    {
+        actions.devices = gamepad != null ? new InputDevice[] { gamepad } : System.Array.Empty<InputDevice>();
+    }
+
+    private void DealBlocks(GameObject menu, int playerIndex)
+    {
+        // Each menu owns its own draw pool; never mutate the configured prefab list.
+        var pool = new List<GameObject>(placebaleBlocksPrefabs);
+        for (int i = 0; i < 4; i++)
         {
-            playerRedGamepad = Gamepad.all[0];
-            playerBlueGamepad = Gamepad.all[2];
-            playerGreenGamepad = Gamepad.all[1];
+            if (pool.Count == 0) pool.AddRange(placebaleBlocksPrefabs);
+            if (pool.Count == 0) return;
+            int choice = Random.Range(0, pool.Count);
+            var item = Instantiate(pool[choice], menu.transform);
+            item.GetComponent<BlockClick>().AssignOwner(playerIndex);
+            pool.RemoveAt(choice);
         }
-        else
-        {
-            Debug.Log("Not enough controllers connected");
-        }
-        for (int i = 0; i<4; i++)
-        {
-            int randomInt=Random.Range(0,placebaleBlocksPrefabsTemp.Count-1);
-            Instantiate(placebaleBlocksPrefabsTemp[randomInt],redMenu.transform);
-            placebaleBlocksPrefabsTemp.RemoveAt(randomInt);
-        }
-        for (int i = 0; i<4; i++)
-        {
-            int randomInt=Random.Range(0,placebaleBlocksPrefabsTemp.Count-1);
-            Instantiate(placebaleBlocksPrefabsTemp[randomInt],greenMenu.transform);
-            placebaleBlocksPrefabsTemp.RemoveAt(randomInt);
-        }
-        for (int i = 0; i<4; i++)
-        {
-            int randomInt=Random.Range(0,placebaleBlocksPrefabsTemp.Count-1);
-            Instantiate(placebaleBlocksPrefabsTemp[randomInt],blueMenu.transform);
-            placebaleBlocksPrefabsTemp.RemoveAt(randomInt);
-        }
-        
+    }
+
+    private bool HasRemainingBlocks(GameObject menu, int playerIndex)
+    {
+        return GetGamepad(playerIndex) != null && menu.GetComponentInChildren<BlockClick>() != null;
     }
 
     private void Update()
     {
         if(currentGameState== GameStates.Building)
         {
-            if (FindAnyObjectByType<BlockClick>() == null)
-            {
-                winButton.SetActive(true);
-            }
+            bool ready = !HasRemainingBlocks(redMenu, 0) && !HasRemainingBlocks(greenMenu, 1) &&
+                !HasRemainingBlocks(blueMenu, 2) && !blockSystem.HasPendingBlocks;
+            winButton.SetActive(ready);
         }
         if (currentGameState == GameStates.Playing)
         {
@@ -134,6 +132,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayButton()
     {
+        if (!IsBuilding || blockSystem.HasPendingBlocks || HasRemainingBlocks(redMenu, 0) ||
+            HasRemainingBlocks(greenMenu, 1) || HasRemainingBlocks(blueMenu, 2)) return;
         currentGameState=GameStates.Playing;
         buildingUI.SetActive(false);
         playingUI.SetActive(true);

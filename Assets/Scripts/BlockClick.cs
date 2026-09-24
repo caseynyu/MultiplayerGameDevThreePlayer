@@ -1,31 +1,32 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BlockClick : MonoBehaviour,IPointerClickHandler
+public class BlockClick : MonoBehaviour, IPointerClickHandler
 {
-    private BlockSystem blockSystem;
     [SerializeField] private BlockData blockData;
+    private BlockSystem blockSystem;
     private GameManager gameManager;
-    void Awake()
+    private int ownerIndex = -1;
+    private bool pickedUp;
+
+    private void Awake()
     {
-        blockSystem = FindAnyObjectByType<BlockSystem>().GetComponent<BlockSystem>();
+        blockSystem = FindAnyObjectByType<BlockSystem>();
         gameManager = FindAnyObjectByType<GameManager>();
     }
 
+    public void AssignOwner(int playerIndex) => ownerIndex = playerIndex;
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(gameManager.lastPressedGamepadMouse==0)
-        {
-            blockSystem.SwitchBlock(blockData,"Red",gameObject);
-        }
-        if(gameManager.lastPressedGamepadMouse==1)
-        {
-            blockSystem.SwitchBlock(blockData,"Green",gameObject);
-        }
-        if(gameManager.lastPressedGamepadMouse==2)
-        {
-            blockSystem.SwitchBlock(blockData,"Blue",gameObject);
-        }
-    }
+        // Only an identified controller cursor can take an item from its own menu.
+        if (!(eventData is ControllerPointerEventData controllerEvent) || pickedUp ||
+            !gameManager.IsBuilding || controllerEvent.PlayerIndex != ownerIndex)
+            return;
 
+        if (!blockSystem.TryPickUp(blockData, ownerIndex)) return;
+        pickedUp = true;
+        gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
 }

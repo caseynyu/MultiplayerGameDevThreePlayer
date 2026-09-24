@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 985797861024197858}
   - component: {fileID: 2930102636665765576}
   m_Layer: 0
-  m_Name: IceBlock
+  m_Name: IceBlock 1
   m_TagString: Ice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.014, y: -0.027, z: 0}
-  m_LocalScale: {x: 0.26379362, y: 0.17190206, z: 0.13099296}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.13099296}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4988631721711406031}

@@ -495,9 +495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bbd8702a0c4894d9bdc98a19600b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildingSystem
-  blockData1: {fileID: 11400000, guid: 70c6cb1e82455564da127e3a70170e4b, type: 2}
-  blockData2: {fileID: 11400000, guid: 25a82f83a61850046b1a6638bf6417e6, type: 2}
-  blockData3: {fileID: 11400000, guid: 898e8914c78ed7b479998aea9f25fbd7, type: 2}
   previewPrefab: {fileID: 8324786395518569581, guid: 0630b8d0d2dbed54999a39820586c3b4, type: 3}
   blockPrefab: {fileID: 6317382557731026216, guid: 0cfea77ee72c1c247a3aac0e0c36488e, type: 3}
   grid: {fileID: 361012554}
@@ -583,7 +580,7 @@ GameObject:
   - component: {fileID: 396309737}
   - component: {fileID: 396309736}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -760,7 +757,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1863,7 +1860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
   m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
+  m_sendNavigationEvents: 0
   m_DragThreshold: 10
 --- !u!4 &1217986141
 Transform:
