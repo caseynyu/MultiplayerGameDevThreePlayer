@@ -148,6 +148,10 @@ namespace TarodevController
         
         private float _frameLeftGrounded = float.MinValue;
         private bool _grounded;
+		private bool _onIce;
+		private bool _onWall;
+		private int _wallDirection;
+        //check if you're on a wall and which way is away from that wall
 
         private void CheckCollisions()
         {
